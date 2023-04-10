@@ -19,8 +19,11 @@ spec:
           limits:
             memory: "1Gi"
             cpu: 1
-        {{- with .Values.extraEnv }}
         env:
-          {{- toYaml . | nindent 12 }}
+        {{- with .Values.extraEnv }}
+        {{- toYaml . | nindent 12 }}
         {{- end }}
+        resources:
         {{- with .Values.resources }}
+        {{- toYaml . | nindent 12 }}
+        {{- end }}
