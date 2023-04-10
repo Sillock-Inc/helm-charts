@@ -2,6 +2,13 @@ apiVersion: v1
 entries:
   dotbot:
   - apiVersion: v2
+    created: "2023-04-10T20:45:44.311462813Z"
+    digest: f24e13b1931421495269a18d4e17297f4d90486ffabd4ac5771a1ee25a7d1b90
+    name: dotbot
+    urls:
+    - https://github.com/Sillock-Inc/helm-charts/releases/download/dotbot-0.1.1/dotbot-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     created: "2023-04-10T20:36:49.593419387Z"
     digest: 17ade10096cf43ac0282b41ff8e8c74b9590642138a4e80eb08e79d2f91840b5
     name: dotbot
@@ -15,4 +22,4 @@ entries:
     urls:
     - https://github.com/Sillock-Inc/helm-charts/releases/download/dotbot-0.0.1/dotbot-0.0.1.tgz
     version: 0.0.1
-generated: "2023-04-10T20:36:49.593426887Z"
+generated: "2023-04-10T20:45:44.311476713Z"
