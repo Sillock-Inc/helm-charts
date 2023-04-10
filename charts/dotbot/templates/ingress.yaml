@@ -1,0 +1,43 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ template "dotbot.fullname" . }}
+  labels:
+    app: "{{ template "dotbot.fullname" . }}"
+  annotations:
+    {{- if .Values.ingress.certManager.enabled }}
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.certManager.issuer }}
+    {{- end }}
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  rules:
+  {{- range .Values.ingress.hosts }}
+  - host: {{ .name }}
+    http:
+      paths:
+      - path: {{ default "/" .path }}
+        pathType: {{ default "Prefix" .pathType}}
+        backend:
+          service:
+            name: {{ template "dotbot.fullname" $ }}
+            port:
+              name: http
+  {{- end }}
+  tls:
+  {{- range .Values.ingress.hosts }}
+  {{- if .tls }}
+  - hosts:
+  {{- if .tlsHosts }}
+  {{- range $host := .tlsHosts }}
+    - {{ $host }}
+  {{- end }}
+  {{- else }}
+    - {{ .name }}
+  {{- end }}
+    secretName: {{ .tlsSecret }}
+  {{- end }}
+  {{- end }}
+{{- end }}
